@@ -40,19 +40,21 @@ public class InMemoryTaskManager implements TaskManager {
             System.out.println("Введите 2, если передумали удалять все задачи");
             try {
                 int menuKey = Integer.parseInt(scanner.nextLine().trim());
-                if (menuKey == 1) {
-                    takePause();
-                    task.clearTaskAll();
-                    takePause();
-                    epic.clearEpicAll();
-                    takePause();
-                    subtask.clearSubtaskAll();
-                    takePause();
-                    System.out.println("Все задачи успешно удалены" + '\n');
-                    break;
-                } else if (menuKey == 2) {
-                    break;
-                } else System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
+                switch (menuKey) {
+                    case 1 -> {
+                        takePause();
+                        task.clearTaskAll();
+                        takePause();
+                        epic.clearEpicAll();
+                        takePause();
+                        subtask.clearSubtaskAll();
+                        takePause();
+                        System.out.println("Все задачи успешно удалены" + '\n');
+                    }
+                    case 2 -> {}
+                    default -> throw new NumberFormatException();
+                }
+                break;
             } catch (NumberFormatException e) {
                 System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
             }
@@ -95,15 +97,17 @@ public class InMemoryTaskManager implements TaskManager {
             System.out.println("Введите 0, чтобы вернуть назад");
             try {
                 int menuKey = Integer.parseInt(scanner.nextLine().trim());
-                if (menuKey == 1) {
-                    task.createTask(++taskKey);
-                } else if (menuKey == 2) {
-                    epic.createEpic(++taskKey);
-                    taskKey = subtask.subtaskKey;
-                } else if (menuKey == 0) {
-                    System.out.println("Возвращаемся назад ..." + '\n');
+                switch (menuKey) {
+                    case 1 -> task.createTask(++taskKey);
+                    case 2 -> {
+                        epic.createEpic(++taskKey);
+                        taskKey = subtask.subtaskKey;
+                    }
+                    case 0 -> System.out.println("Возвращаемся назад ..." + '\n');
+                    default -> throw new NumberFormatException();
+                }
+                if (menuKey == 0)
                     break;
-                } else System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
             } catch (NumberFormatException e) {
                 System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
             }
@@ -128,16 +132,13 @@ public class InMemoryTaskManager implements TaskManager {
                         System.out.println("Введите 3, если хотите обновить статус задачи");
                         try {
                             int updateKey = Integer.parseInt(scanner.nextLine().trim());
-                            if (updateKey == 1) {
-                                task.updateNameOfTask(keyToFind);
-                                break;
-                            } else if (updateKey == 2) {
-                                task.updateShortDescriptionOfTask(keyToFind);
-                                break;
-                            } else if (updateKey == 3) {
-                                task.updateStatusOfTask(keyToFind);
-                                break;
-                            } else System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
+                            switch (updateKey) {
+                                case 1 -> task.updateNameOfTask(keyToFind);
+                                case 2 -> task.updateShortDescriptionOfTask(keyToFind);
+                                case 3 -> task.updateStatusOfTask(keyToFind);
+                                default -> throw new NumberFormatException();
+                            }
+                            break;
                         } catch (NumberFormatException e) {
                             System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
                         }
@@ -152,13 +153,12 @@ public class InMemoryTaskManager implements TaskManager {
                         System.out.println("Для глобальных задач обновление статуса невозможно");
                         try {
                             int updateKey = Integer.parseInt(scanner.nextLine().trim());
-                            if (updateKey == 1) {
-                                epic.updateNameOfEpic(keyToFind);
-                                break;
-                            } else if (updateKey == 2) {
-                                epic.updateShortDescriptionOfEpic(keyToFind);
-                                break;
-                            } else System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
+                            switch (updateKey) {
+                                case 1 -> epic.updateNameOfEpic(keyToFind);
+                                case 2 -> epic.updateShortDescriptionOfEpic(keyToFind);
+                                default -> throw new NumberFormatException();
+                            }
+                            break;
                         } catch (NumberFormatException e) {
                             System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
                         }
@@ -173,16 +173,13 @@ public class InMemoryTaskManager implements TaskManager {
                         System.out.println("Введите 3, если хотите обновить статус подзадачи");
                         try {
                             int updateKey = Integer.parseInt(scanner.nextLine().trim());
-                            if (updateKey == 1) {
-                                subtask.updateNameOfSubtask(keyToFind);
-                                break;
-                            } else if (updateKey == 2) {
-                                subtask.updateShortDescriptionOfSubtask(keyToFind);
-                                break;
-                            } else if (updateKey == 3) {
-                                subtask.updateStatusOfSubtask(keyToFind, epic);
-                                break;
-                            } else System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
+                            switch (updateKey) {
+                                case 1 -> subtask.updateNameOfSubtask(keyToFind);
+                                case 2 -> subtask.updateShortDescriptionOfSubtask(keyToFind);
+                                case 3 -> subtask.updateStatusOfSubtask(keyToFind, epic);
+                                default -> throw new NumberFormatException();
+                            }
+                            break;
                         } catch (NumberFormatException e) {
                             System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
                         }

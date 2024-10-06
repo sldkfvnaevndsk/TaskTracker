@@ -14,24 +14,19 @@ public class TaskTracker {
             printMenu();
             try {
                 int menuKey = Integer.parseInt(scanner.nextLine().trim());
-                if (menuKey == 1) {
-                    inMemoryTaskManager.printTaskList(); //Просмотр всех задач
-                } else if (menuKey == 2) {
-                    inMemoryTaskManager.clearTaskList(); //Удаление всех задач
-                } else if (menuKey == 3) {
-                    System.out.println(inMemoryTaskManager.findTaskByKey() + '\n'); //Поиск задачи по ключу
-                } else if (menuKey == 4) {
-                    inMemoryTaskManager.createTaskOrEpic(); //Создание задачи
-                } else if (menuKey == 5) {
-                    inMemoryTaskManager.updateTask(); //Обновление задачи
-                } else if (menuKey == 6) {
-                    System.out.println(inMemoryTaskManager.removeTaskByKey() + '\n'); //Удаление задачи по ключу
-                } else if (menuKey == 7) {
-                    inMemoryTaskManager.printSubtasksOfEpic(); //Получение списка подзадач определенного эпика
-                } else if (menuKey == 0) {
-                    System.out.println("Выходим ...");
+                switch (menuKey) {
+                    case 1 -> inMemoryTaskManager.printTaskList(); //Просмотр всех задач
+                    case 2 -> inMemoryTaskManager.clearTaskList(); //Удаление всех задач
+                    case 3 -> System.out.println(inMemoryTaskManager.findTaskByKey() + '\n'); //Поиск задачи по ключу
+                    case 4 -> inMemoryTaskManager.createTaskOrEpic(); //Создание задачи
+                    case 5 -> inMemoryTaskManager.updateTask(); //Обновление задачи
+                    case 6 -> System.out.println(inMemoryTaskManager.removeTaskByKey() + '\n'); //Удаление задачи по ключу
+                    case 7 -> inMemoryTaskManager.printSubtasksOfEpic(); //Получение списка подзадач определенного эпика
+                    case 0 -> System.out.println("Выходим ...");
+                    default -> throw new NumberFormatException();
+                }
+                if (menuKey == 0)
                     break;
-                } else System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
             } catch (NumberFormatException e) {
                 System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
             }
