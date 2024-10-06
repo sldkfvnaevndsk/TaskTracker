@@ -8,32 +8,26 @@ public class TaskTracker {
         Task task = new Task();
         Subtask subtask = new Subtask();
         Epic epic = new Epic(subtask);
-        WritingTaskList writingTaskList = new WritingTaskList(task, epic, subtask);
-        RemovingTaskList removingTaskList = new RemovingTaskList(task, epic, subtask);
-        ResearchTask researchTask = new ResearchTask(task, epic, subtask);
-        CreatingTaskAndEpic creatingTaskAndEpic = new CreatingTaskAndEpic(task, epic, subtask);
-        UpdateTask updateTask = new UpdateTask(task, epic, subtask);
-        RemovingTask removingTask = new RemovingTask(task, epic, subtask);
-        WritingSubtaskByEpic writingSubtaskByEpic = new WritingSubtaskByEpic(task, epic, subtask);
+        InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager(task, epic, subtask);
 
         while (true) {
             printMenu();
             try {
                 int menuKey = Integer.parseInt(scanner.nextLine().trim());
                 if (menuKey == 1) {
-                    writingTaskList.prepareOutput(); //Просмотр всех задач
+                    inMemoryTaskManager.printTaskList(); //Просмотр всех задач
                 } else if (menuKey == 2) {
-                    removingTaskList.acceptChoice(); //Удаление всех задач
+                    inMemoryTaskManager.clearTaskList(); //Удаление всех задач
                 } else if (menuKey == 3) {
-                    System.out.println(researchTask.research() + '\n'); //Поиск задачи по ключу
+                    System.out.println(inMemoryTaskManager.findTaskByKey() + '\n'); //Поиск задачи по ключу
                 } else if (menuKey == 4) {
-                    creatingTaskAndEpic.in(); //Создание задачи
+                    inMemoryTaskManager.createTaskOrEpic(); //Создание задачи
                 } else if (menuKey == 5) {
-                    updateTask.chooseTask(); //Обновление задачи
+                    inMemoryTaskManager.updateTask(); //Обновление задачи
                 } else if (menuKey == 6) {
-                    System.out.println(removingTask.remove() + '\n'); //Удаление задачи по ключу
+                    System.out.println(inMemoryTaskManager.removeTaskByKey() + '\n'); //Удаление задачи по ключу
                 } else if (menuKey == 7) {
-                    writingSubtaskByEpic.takeEpicKey(); //Получение списка подзадач определенного эпика
+                    inMemoryTaskManager.printSubtasksOfEpic(); //Получение списка подзадач определенного эпика
                 } else if (menuKey == 0) {
                     System.out.println("Выходим ...");
                     break;
