@@ -116,79 +116,74 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void updateTask() {
-        while (true) {
-            System.out.println("Введите идентификатор задачу, которую вы хотите обновить");
-            try {
-                int keyToFind = Integer.parseInt(scanner.nextLine().trim());
-                if (keyToFind <= 0) {
-                    throw new NumberFormatException();
-                }
-                if (task.findTaskByKey(keyToFind) != null) {
-                    while (true) {
-                        System.out.println("По введённому идентификатору определилась стандартная задача");
-                        System.out.println("Выберите, что вы хотите обновить");
-                        System.out.println("Введите 1, если хотите обновить название задачи");
-                        System.out.println("Введите 2, если хотите обновить краткое описание задачи");
-                        System.out.println("Введите 3, если хотите обновить статус задачи");
-                        try {
-                            int updateKey = Integer.parseInt(scanner.nextLine().trim());
-                            switch (updateKey) {
-                                case 1 -> task.updateNameOfTask(keyToFind);
-                                case 2 -> task.updateShortDescriptionOfTask(keyToFind);
-                                case 3 -> task.updateStatusOfTask(keyToFind);
-                                default -> throw new NumberFormatException();
-                            }
-                            break;
-                        } catch (NumberFormatException e) {
-                            System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
-                        }
-                    }
-                    break;
-                } else if (epic.findEpicByKey(keyToFind) != null) {
-                    while (true) {
-                        System.out.println("По введённому идентификатору определилась глобальная задача");
-                        System.out.println("Выберите, что вы хотите обновить");
-                        System.out.println("Введите 1, если хотите обновить название задачи");
-                        System.out.println("Введите 2, если хотите обновить краткое описание задачи");
-                        System.out.println("Для глобальных задач обновление статуса невозможно");
-                        try {
-                            int updateKey = Integer.parseInt(scanner.nextLine().trim());
-                            switch (updateKey) {
-                                case 1 -> epic.updateNameOfEpic(keyToFind);
-                                case 2 -> epic.updateShortDescriptionOfEpic(keyToFind);
-                                default -> throw new NumberFormatException();
-                            }
-                            break;
-                        } catch (NumberFormatException e) {
-                            System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
-                        }
-                    }
-                    break;
-                } else if (subtask.findSubtaskByKey(keyToFind) != null) {
-                    while (true) {
-                        System.out.println("По введённому идентификатору определилась подзадача");
-                        System.out.println("Выберите, что вы хотите обновить");
-                        System.out.println("Введите 1, если хотите обновить название подзадачи");
-                        System.out.println("Введите 2, если хотите обновить краткое описание подзадачи");
-                        System.out.println("Введите 3, если хотите обновить статус подзадачи");
-                        try {
-                            int updateKey = Integer.parseInt(scanner.nextLine().trim());
-                            switch (updateKey) {
-                                case 1 -> subtask.updateNameOfSubtask(keyToFind);
-                                case 2 -> subtask.updateShortDescriptionOfSubtask(keyToFind);
-                                case 3 -> subtask.updateStatusOfSubtask(keyToFind, epic);
-                                default -> throw new NumberFormatException();
-                            }
-                            break;
-                        } catch (NumberFormatException e) {
-                            System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
-                        }
-                    }
-                    break;
-                } else System.out.println("Задача с таким идентификатором отсутствует");
-            } catch (NumberFormatException e) {
-                System.out.println("Неверный формат ввода идентификатора" + '\n');
+        System.out.println("Введите идентификатор задачу, которую вы хотите обновить");
+        try {
+            int keyToFind = Integer.parseInt(scanner.nextLine().trim());
+            if (keyToFind <= 0) {
+                throw new NumberFormatException();
             }
+            if (task.findTaskByKey(keyToFind) != null) {
+                while (true) {
+                    System.out.println("По введённому идентификатору определилась стандартная задача");
+                    System.out.println("Выберите, что вы хотите обновить");
+                    System.out.println("Введите 1, если хотите обновить название задачи");
+                    System.out.println("Введите 2, если хотите обновить краткое описание задачи");
+                    System.out.println("Введите 3, если хотите обновить статус задачи");
+                    try {
+                        int updateKey = Integer.parseInt(scanner.nextLine().trim());
+                        switch (updateKey) {
+                            case 1 -> task.updateNameOfTask(keyToFind);
+                            case 2 -> task.updateShortDescriptionOfTask(keyToFind);
+                            case 3 -> task.updateStatusOfTask(keyToFind);
+                            default -> throw new NumberFormatException();
+                        }
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
+                    }
+                }
+            } else if (epic.findEpicByKey(keyToFind) != null) {
+                while (true) {
+                    System.out.println("По введённому идентификатору определилась глобальная задача");
+                    System.out.println("Выберите, что вы хотите обновить");
+                    System.out.println("Введите 1, если хотите обновить название задачи");
+                    System.out.println("Введите 2, если хотите обновить краткое описание задачи");
+                    System.out.println("Для глобальных задач обновление статуса невозможно");
+                    try {
+                        int updateKey = Integer.parseInt(scanner.nextLine().trim());
+                        switch (updateKey) {
+                            case 1 -> epic.updateNameOfEpic(keyToFind);
+                            case 2 -> epic.updateShortDescriptionOfEpic(keyToFind);
+                            default -> throw new NumberFormatException();
+                        }
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
+                    }
+                }
+            } else if (subtask.findSubtaskByKey(keyToFind) != null) {
+                while (true) {
+                    System.out.println("По введённому идентификатору определилась подзадача");
+                    System.out.println("Выберите, что вы хотите обновить");
+                    System.out.println("Введите 1, если хотите обновить название подзадачи");
+                    System.out.println("Введите 2, если хотите обновить краткое описание подзадачи");
+                    System.out.println("Введите 3, если хотите обновить статус подзадачи");
+                    try {
+                        int updateKey = Integer.parseInt(scanner.nextLine().trim());
+                        switch (updateKey) {
+                            case 1 -> subtask.updateNameOfSubtask(keyToFind);
+                            case 2 -> subtask.updateShortDescriptionOfSubtask(keyToFind);
+                            case 3 -> subtask.updateStatusOfSubtask(keyToFind, epic);
+                            default -> throw new NumberFormatException();
+                        }
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
+                    }
+                }
+            } else System.out.println("Задача с таким идентификатором отсутствует");
+        } catch (NumberFormatException e) {
+            System.out.println("Неверный формат ввода идентификатора" + '\n');
         }
     }
 
@@ -225,21 +220,18 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void printSubtasksOfEpic() {
-        while (true) {
-            System.out.println("Введите индентификатор глобальной задачи, чьи подзадачи вы хотите вывести");
-            try {
-                int epicKey = Integer.parseInt(scanner.nextLine().trim());
-                if (epic.findEpicByKey(epicKey) != null) {
-                    String nameOfEpic = epic.findEpicByKey(epicKey);
-                    System.out.println("Глобальная задача " + nameOfEpic + " имеет следующие подзадачи:");
-                    subtask.printSubtaskByEpic(epicKey);
-                    break;
-                } else throw new NullPointerException();
-            } catch (NumberFormatException e) {
-                System.out.println("Неверный формат ввода идентификатора" + '\n');
-            } catch (NullPointerException e) {
-                System.out.println("Глобальная задача с таким идентификатором отсутствует" + '\n');
-            }
+        System.out.println("Введите индентификатор глобальной задачи, чьи подзадачи вы хотите вывести");
+        try {
+            int epicKey = Integer.parseInt(scanner.nextLine().trim());
+            if (epic.findEpicByKey(epicKey) != null) {
+                String nameOfEpic = epic.findEpicByKey(epicKey);
+                System.out.println("Глобальная задача " + nameOfEpic + " имеет следующие подзадачи:");
+                subtask.printSubtaskByEpic(epicKey);
+            } else throw new NullPointerException();
+        } catch (NumberFormatException e) {
+            System.out.println("Неверный формат ввода идентификатора" + '\n');
+        } catch (NullPointerException e) {
+            System.out.println("Глобальная задача с таким идентификатором отсутствует" + '\n');
         }
     }
 }
