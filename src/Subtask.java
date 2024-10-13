@@ -19,14 +19,12 @@ public class Subtask {
     Epic epic;
 
     public Subtask() {
-
         scanner = new Scanner(System.in);
         subtask = new HashMap<>();
         subtaskClone = new HashMap<>();
     }
 
     public void createSubtask(int epicKey) {
-
         this.epicKey = String.valueOf(epicKey);
         subtaskKey = epicKey;
         boolean isEnd;
@@ -49,7 +47,6 @@ public class Subtask {
     }
 
     public boolean endCreatingSubtask() {
-
         boolean isEnd;
         while (true) {
             printMenu();
@@ -70,21 +67,15 @@ public class Subtask {
     }
 
     public void clearSubtaskAll() {
-
-        try {
-            if (subtask.isEmpty()) {
-                System.out.println("Список подзадач пуст" + '\n');
-            } else {
-                subtask.clear();
-                System.out.println("Список подзадач пуст" + '\n');
-            }
-        } catch (NullPointerException e) {
+        if (subtask.isEmpty()) {
             System.out.println("Список подзадач пуст" + '\n');
+        } else {
+            subtask.clear();
+            System.out.println("Список подзадач очищен" + '\n');
         }
     }
 
     public void printSubtaskAll() {
-
         try {
             if (subtask.isEmpty()) {
                 System.out.println("Список подзадач пуст" + '\n');
@@ -103,7 +94,6 @@ public class Subtask {
     }
 
     public void printSubtaskByEpic(int epicKey) {
-
         String secondKey = String.valueOf(epicKey);
         for (Integer i : subtask.keySet()) {
             if (subtask.get(i).contains(secondKey)) {
@@ -116,7 +106,6 @@ public class Subtask {
     }
 
     public String findSubtaskByKey(int key) {
-
         if (subtask.containsKey(key)) {
             return subtask.get(key).get(0);
         }
@@ -124,12 +113,10 @@ public class Subtask {
     }
 
     public void removeSubtaskByKey(int key) {
-
         subtask.remove(key);
     }
 
     public void removeSubtaskByEpic(int epicKey) {
-
         subtaskClone.putAll(subtask);
         String secondKey = String.valueOf(epicKey);
         for (Integer i : subtask.keySet()) {
@@ -142,14 +129,12 @@ public class Subtask {
     }
 
     public void printMenu() {
-
         System.out.println("Есть ещё подзадачи?");
         System.out.println("Введите 1, если да");
         System.out.println("Введите 2, если нет");
     }
 
     public void updateNameOfSubtask(int subtaskKey) {
-
         System.out.println("Введите новое название подзадачи");
         String newName = scanner.nextLine().trim();
         subtask.get(subtaskKey).remove(0);
@@ -158,7 +143,6 @@ public class Subtask {
     }
 
     public void updateShortDescriptionOfSubtask(int subtaskKey) {
-
         System.out.println("Введите новое короткое описание подзадачи");
         String newShortDescription = scanner.nextLine().trim();
         subtask.get(subtaskKey).remove(1);
@@ -167,7 +151,6 @@ public class Subtask {
     }
 
     public void updateStatusOfSubtask(int subtaskKey, Epic epic) {
-
         if (subtask.get(subtaskKey).contains(subtaskStatusNew)) {
             subtask.get(subtaskKey).remove(2);
             subtask.get(subtaskKey).add(2, subtaskStatusInProgress);
@@ -183,22 +166,17 @@ public class Subtask {
         String epicKey = subtask.get(subtaskKey).get(3);
         int counterStatusFull = 0;
         int counterStatusNew = 0;
-        int counterStatusInProgress = 0;
         int counterStatusDone = 0;
         for (Integer i : subtask.keySet()) {
             if (subtask.get(i).contains(subtaskStatusNew) && subtask.get(i).contains(epicKey)) {
                 counterStatusFull++;
                 counterStatusNew++;
-            } else if (subtask.get(i).contains(subtaskStatusInProgress) && subtask.get(i).contains(epicKey)) {
-                counterStatusFull++;
-                counterStatusInProgress++;
             } else if (subtask.get(i).contains(subtaskStatusDone) && subtask.get(i).contains(epicKey)) {
                 counterStatusFull++;
                 counterStatusDone++;
             }
         }
         int epicKeyTrans = Integer.parseInt(epicKey);
-        epic.updateStatusOfEpic(counterStatusFull, counterStatusNew, counterStatusInProgress, counterStatusDone,
-                epicKeyTrans);
+        epic.updateStatusOfEpic(counterStatusFull, counterStatusNew, counterStatusDone, epicKeyTrans);
     }
 }

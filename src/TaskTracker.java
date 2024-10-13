@@ -18,7 +18,7 @@ public class TaskTracker {
                     case 1 -> inMemoryTaskManager.printTaskList(); //Просмотр всех задач
                     case 2 -> inMemoryTaskManager.clearTaskList(); //Удаление всех задач
                     case 3 -> System.out.println(inMemoryTaskManager.findTaskByKey() + '\n'); //Поиск задачи по ключу
-                    case 4 -> inMemoryTaskManager.createTaskOrEpic(); //Создание задачи
+                    case 4 -> inMemoryTaskManager.createTask(); //Создание задачи
                     case 5 -> inMemoryTaskManager.updateTask(); //Обновление задачи
                     case 6 -> System.out.println(inMemoryTaskManager.removeTaskByKey() + '\n'); //Удаление задачи по ключу
                     case 7 -> inMemoryTaskManager.printSubtasksOfEpic(); //Получение списка подзадач определенного эпика

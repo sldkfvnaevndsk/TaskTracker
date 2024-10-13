@@ -15,13 +15,11 @@ public class Task {
     HashMap<Integer, ArrayList<String>> task;
 
     public Task() {
-
         scanner = new Scanner(System.in);
         task = new HashMap<>();
     }
 
     public void createTask(int taskKey) {
-
         taskInfo = new ArrayList<>();
         System.out.println("Введите название задачи:");
         taskName = scanner.nextLine().trim();
@@ -34,21 +32,15 @@ public class Task {
     }
 
     public void clearTaskAll() {
-
-        try {
-            if (task.isEmpty()) {
-                System.out.println("Список стандартных задач пуст" + '\n');
-            } else {
-                task.clear();
-                System.out.println("Список стандартных задач пуст" + '\n');
-            }
-        } catch (NullPointerException e) {
+        if (task.isEmpty()) {
             System.out.println("Список стандартных задач пуст" + '\n');
+        } else {
+            task.clear();
+            System.out.println("Список стандартных задач очищен" + '\n');
         }
     }
 
     public void printTaskAll() {
-
         try {
             if (task.isEmpty()) {
                 System.out.println("Список стандартных задач пуст" + '\n');
@@ -66,7 +58,6 @@ public class Task {
     }
 
     public String findTaskByKey(int key) {
-
         if (task.containsKey(key)) {
             return task.get(key).get(0);
         }
@@ -74,12 +65,10 @@ public class Task {
     }
 
     public void removeTaskByKey(int key) {
-
         task.remove(key);
     }
 
     public void updateNameOfTask(int taskKey) {
-
         System.out.println("Введите новое название задачи");
         String newName = scanner.nextLine().trim();
         task.get(taskKey).remove(0);
@@ -88,7 +77,6 @@ public class Task {
     }
 
     public void updateShortDescriptionOfTask(int taskKey) {
-
         System.out.println("Введите новое короткое описание задачи");
         String newShortDescription = scanner.nextLine().trim();
         task.get(taskKey).remove(1);
@@ -97,7 +85,6 @@ public class Task {
     }
 
     public void updateStatusOfTask(int taskKey) {
-
         if (task.get(taskKey).contains(taskStatusNew)) {
             task.get(taskKey).remove(2);
             task.get(taskKey).add(2, taskStatusInProgress);

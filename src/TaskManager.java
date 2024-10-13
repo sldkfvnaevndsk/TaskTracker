@@ -6,7 +6,7 @@ public interface TaskManager {
 
     String findTaskByKey();
 
-    void createTaskOrEpic();
+    void createTask();
 
     void updateTask();
 

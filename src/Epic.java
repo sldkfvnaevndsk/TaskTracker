@@ -16,14 +16,12 @@ public class Epic {
     HashMap<Integer, ArrayList<String>> epic;
 
     public Epic(Subtask subtask) {
-
         scanner = new Scanner(System.in);
         this.subtask = subtask;
         epic = new HashMap<>();
     }
 
     public void createEpic(int taskKey) {
-
         epicInfo = new ArrayList<>();
         System.out.println("Введите название глобальной задачи:");
         epicName = scanner.nextLine().trim();
@@ -37,21 +35,15 @@ public class Epic {
     }
 
     public void clearEpicAll() {
-
-        try {
-            if (epic.isEmpty()) {
-                System.out.println("Список глобальных задач пуст" + '\n');
-            } else {
-                epic.clear();
-                System.out.println("Список глобальных задач пуст" + '\n');
-            }
-        } catch (NullPointerException e) {
+        if (epic.isEmpty()) {
             System.out.println("Список глобальных задач пуст" + '\n');
+        } else {
+            epic.clear();
+            System.out.println("Список глобальных задач очищен" + '\n');
         }
     }
 
     public void printEpicAll() {
-
         try {
             if (epic.isEmpty()) {
                 System.out.println("Список глобальных задач пуст" + '\n');
@@ -70,7 +62,6 @@ public class Epic {
     }
 
     public String findEpicByKey(int key) {
-
         if (epic.containsKey(key)) {
             return epic.get(key).get(0);
         }
@@ -78,13 +69,11 @@ public class Epic {
     }
 
     public void removeEpicByKey(int key) {
-
         epic.remove(key);
         subtask.removeSubtaskByEpic(key);
     }
 
     public void updateNameOfEpic(int epicKey) {
-
         System.out.println("Введите новое название задачи");
         String newName = scanner.nextLine().trim();
         epic.get(epicKey).remove(0);
@@ -93,7 +82,6 @@ public class Epic {
     }
 
     public void updateShortDescriptionOfEpic(int epicKey) {
-
         System.out.println("Введите новое короткое описание задачи");
         String newShortDescription = scanner.nextLine().trim();
         epic.get(epicKey).remove(1);
@@ -101,9 +89,7 @@ public class Epic {
         System.out.println("Короткое описание задачи обновлено" + '\n');
     }
 
-    public void updateStatusOfEpic(int counterStatusFull, int counterStatusNew, int counterStatusInProgress,
-                                   int counterStatusDone, int epicKey) {
-
+    public void updateStatusOfEpic(int counterStatusFull, int counterStatusNew, int counterStatusDone, int epicKey) {
         if (counterStatusNew != counterStatusFull && epic.get(epicKey).contains(epicStatusNew)) {
             epic.get(epicKey).remove(2);
             epic.get(epicKey).add(2, epicStatusInProgress);

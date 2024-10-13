@@ -89,7 +89,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void createTaskOrEpic() {
+    public void createTask() {
         while (true) {
             System.out.println("Какую задачу вы хотите создать?");
             System.out.println("Введите 1, чтобы создать стандартную задачу");
