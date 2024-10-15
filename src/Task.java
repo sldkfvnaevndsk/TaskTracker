@@ -12,11 +12,13 @@ public class Task {
 
     Scanner scanner;
     ArrayList<String> taskInfo;
+    ArrayList<String> taskHistory;
     HashMap<Integer, ArrayList<String>> task;
 
     public Task() {
         scanner = new Scanner(System.in);
         task = new HashMap<>();
+        taskHistory = new ArrayList<>();
     }
 
     public void createTask(int taskKey) {
@@ -95,6 +97,24 @@ public class Task {
             System.out.println("Статус задачи обновлён" + '\n');
         } else if (task.get(taskKey).contains(taskStatusDone)) {
             System.out.println("Задача уже завершена" + '\n');
+        }
+    }
+
+    public void fillHistory() {
+        if (taskHistory.size() < 10) {
+            taskHistory.add("zero");
+        } else if (taskHistory.size() == 10) {
+            taskHistory.remove(0);
+            taskHistory.add("zero");
+        }
+    }
+
+    public void fillHistory(int key) {
+        if (taskHistory.size() < 10) {
+            taskHistory.add(task.get(key).get(0));
+        } else if (taskHistory.size() == 10) {
+            taskHistory.remove(0);
+            taskHistory.add(task.get(key).get(0));
         }
     }
 }

@@ -13,12 +13,14 @@ public class Epic {
     Scanner scanner;
     Subtask subtask;
     ArrayList<String> epicInfo;
+    ArrayList<String> epicHistory;
     HashMap<Integer, ArrayList<String>> epic;
 
     public Epic(Subtask subtask) {
         scanner = new Scanner(System.in);
         this.subtask = subtask;
         epic = new HashMap<>();
+        epicHistory = new ArrayList<>();
     }
 
     public void createEpic(int taskKey) {
@@ -100,6 +102,24 @@ public class Epic {
             System.out.println("Статус глобальной задачи обновлён" + '\n');
         } else if (counterStatusDone == counterStatusFull && epic.get(epicKey).contains(epicStatusDone)) {
             System.out.println("Глобальная задача уже завершена" + '\n');
+        }
+    }
+
+    public void fillHistory() {
+        if (epicHistory.size() < 10) {
+            epicHistory.add("zero");
+        } else if (epicHistory.size() == 10) {
+            epicHistory.remove(0);
+            epicHistory.add("zero");
+        }
+    }
+
+    public void fillHistory(int key) {
+        if (epicHistory.size() < 10) {
+            epicHistory.add(epic.get(key).get(0));
+        } else if (epicHistory.size() == 10) {
+            epicHistory.remove(0);
+            epicHistory.add(epic.get(key).get(0));
         }
     }
 }

@@ -73,10 +73,19 @@ public class InMemoryTaskManager implements TaskManager {
             }
             if (task.findTaskByKey(key) != null) {
                 nameOfTask = task.findTaskByKey(key);
+                task.fillHistory(key);
+                epic.fillHistory();
+                subtask.fillHistory();
             } else if (epic.findEpicByKey(key) != null) {
                 nameOfTask = epic.findEpicByKey(key);
+                task.fillHistory();
+                epic.fillHistory(key);
+                subtask.fillHistory();
             } else if (subtask.findSubtaskByKey(key) != null) {
                 nameOfTask = subtask.findSubtaskByKey(key);
+                task.fillHistory();
+                epic.fillHistory();
+                subtask.fillHistory(key);
             }
         } catch (NumberFormatException e) {
             warning = "Неверный формат ввода идентификатора";
@@ -232,6 +241,24 @@ public class InMemoryTaskManager implements TaskManager {
             System.out.println("Неверный формат ввода идентификатора" + '\n');
         } catch (NullPointerException e) {
             System.out.println("Глобальная задача с таким идентификатором отсутствует" + '\n');
+        }
+    }
+
+    @Override
+    public void getHistory() {
+        if (!task.taskHistory.isEmpty() || !epic.epicHistory.isEmpty() || !subtask.subtaskHistory.isEmpty()) {
+            for (int i = 0; i < task.taskHistory.size(); i++) {
+                if (!task.taskHistory.get(i).equals("zero")) {
+                    System.out.println(task.taskHistory.get(i));
+                } else if (!epic.epicHistory.get(i).equals("zero")) {
+                    System.out.println(epic.epicHistory.get(i));
+                } else if (!subtask.subtaskHistory.get(i).equals("zero")) {
+                    System.out.println(subtask.subtaskHistory.get(i));
+                }
+            }
+            System.out.print('\n');
+        } else {
+            System.out.println("История пуста!" + '\n');
         }
     }
 }

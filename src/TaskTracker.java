@@ -22,6 +22,7 @@ public class TaskTracker {
                     case 5 -> inMemoryTaskManager.updateTask(); //Обновление задачи
                     case 6 -> System.out.println(inMemoryTaskManager.removeTaskByKey() + '\n'); //Удаление задачи по ключу
                     case 7 -> inMemoryTaskManager.printSubtasksOfEpic(); //Получение списка подзадач определенного эпика
+                    case 8 -> inMemoryTaskManager.getHistory(); //Получение истории просмотра задач по идентификатору
                     case 0 -> System.out.println("Выходим ...");
                     default -> throw new NumberFormatException();
                 }
@@ -44,6 +45,7 @@ public class TaskTracker {
         System.out.println("Введите 5, чтобы обновить задачу");
         System.out.println("Введите 6, чтобы удалить задачу по ключу");
         System.out.println("Введите 7, чтобы получить список всех подзадач определённого эпика");
+        System.out.println("Введите 8, чтобы посмотреть историю вызова задач по идентификатору");
         System.out.println("Введите 0, чтобы выйти из программы");
     }
 }

@@ -13,4 +13,6 @@ public interface TaskManager {
     String removeTaskByKey();
 
     void printSubtasksOfEpic();
+
+    void getHistory();
 }

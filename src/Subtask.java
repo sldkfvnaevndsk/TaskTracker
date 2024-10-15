@@ -14,6 +14,7 @@ public class Subtask {
 
     Scanner scanner;
     ArrayList<String> subtaskInfo;
+    ArrayList<String> subtaskHistory;
     HashMap<Integer, ArrayList<String>> subtask;
     HashMap<Integer, ArrayList<String>> subtaskClone;
     Epic epic;
@@ -22,6 +23,7 @@ public class Subtask {
         scanner = new Scanner(System.in);
         subtask = new HashMap<>();
         subtaskClone = new HashMap<>();
+        subtaskHistory = new ArrayList<>();
     }
 
     public void createSubtask(int epicKey) {
@@ -178,5 +180,23 @@ public class Subtask {
         }
         int epicKeyTrans = Integer.parseInt(epicKey);
         epic.updateStatusOfEpic(counterStatusFull, counterStatusNew, counterStatusDone, epicKeyTrans);
+    }
+
+    public void fillHistory() {
+        if (subtaskHistory.size() < 10) {
+            subtaskHistory.add("zero");
+        } else if (subtaskHistory.size() == 10) {
+            subtaskHistory.remove(0);
+            subtaskHistory.add("zero");
+        }
+    }
+
+    public void fillHistory(int key) {
+        if (subtaskHistory.size() < 10) {
+            subtaskHistory.add(subtask.get(key).get(0));
+        } else if (subtaskHistory.size() == 10) {
+            subtaskHistory.remove(0);
+            subtaskHistory.add(subtask.get(key).get(0));
+        }
     }
 }
