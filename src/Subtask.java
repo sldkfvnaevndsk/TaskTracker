@@ -62,7 +62,7 @@ public class Subtask {
                     break;
                 } else throw new NumberFormatException();
             } catch (NumberFormatException e) {
-                System.out.println("Такой команды не существует");
+                System.out.println("Такой команды не существует" + '\n');
             }
         }
         return isEnd;

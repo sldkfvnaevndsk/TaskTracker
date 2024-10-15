@@ -190,7 +190,7 @@ public class InMemoryTaskManager implements TaskManager {
                         System.out.println("Такой команды не существует, попробуй ещё раз (:" + '\n');
                     }
                 }
-            } else System.out.println("Задача с таким идентификатором отсутствует");
+            } else System.out.println("Задача с таким идентификатором отсутствует" + '\n');
         } catch (NumberFormatException e) {
             System.out.println("Неверный формат ввода идентификатора" + '\n');
         }
