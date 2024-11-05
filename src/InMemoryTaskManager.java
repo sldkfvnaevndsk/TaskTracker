@@ -258,7 +258,7 @@ public class InMemoryTaskManager implements TaskManager {
             }
             System.out.print('\n');
         } else {
-            System.out.println("История пуста!" + '\n');
+            System.out.println("Нет просмотренных задач!" + '\n');
         }
     }
 }
